@@ -1,0 +1,27 @@
+const { z } = require('zod');
+const dotenv = require('dotenv');
+
+dotenv.config();
+
+const envSchema = z.object({
+  PORT: z.string().default('3005'),
+  NODE_ENV: z.enum(['development', 'production', 'test']).default('development'),
+  AWS_REGION: z.string().default('us-east-1'),
+  PAYMENT_TABLE: z.string(),
+  PAYMENT_PROVIDER: z.enum(['MOCK', 'STRIPE', 'RAZORPAY']).default('MOCK'),
+  WEBHOOK_SECRET: z.string().optional(),
+  EVENT_PROVIDER: z.enum(['SNS', 'SQS', 'EVENTBRIDGE', 'NONE']).default('NONE'),
+  SNS_TOPIC_ARN: z.string().optional(),
+  QUEUE_URL: z.string().optional(),
+  EVENT_BUS_NAME: z.string().optional(),
+  ORDER_SERVICE_URL: z.string().url().optional(),
+});
+
+const _env = envSchema.safeParse(process.env);
+
+if (!_env.success) {
+  console.error('Invalid environment variables:\n', _env.error.format());
+  process.exit(1);
+}
+
+module.exports = _env.data;
