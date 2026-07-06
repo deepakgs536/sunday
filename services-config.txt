@@ -1,0 +1,60 @@
+# Serverless E-Commerce Backend Services Configuration
+
+This file outlines the local configuration for all 7 microservices in the Sunday E-Commerce Backend.
+
+## 1. User Service
+- **Directory**: `user-service/`
+- **Port**: 3000
+- **Base URL**: `http://localhost:3000/api/v1`
+- **Tables**: `UsersTable`
+- **Command to Run**: `npm run dev`
+
+## 2. Product Service
+- **Directory**: `product-service/`
+- **Port**: 3001
+- **Base URL**: `http://localhost:3001/api/v1`
+- **Tables**: `ProductsTable`
+- **Command to Run**: `npm run dev`
+
+## 3. Inventory Service
+- **Directory**: `inventory-service/`
+- **Port**: 3002
+- **Base URL**: `http://localhost:3002/api/v1`
+- **Tables**: `InventoryTable`
+- **Command to Run**: `npm run dev`
+
+## 4. Cart Service
+- **Directory**: `cart-service/`
+- **Port**: 3003
+- **Base URL**: `http://localhost:3003/api/v1`
+- **Tables**: `CartTable`
+- **Dependencies**: `PRODUCT_SERVICE_URL=http://localhost:3001`, `INVENTORY_SERVICE_URL=http://localhost:3002`
+- **Command to Run**: `npm run dev`
+
+## 5. Order Service
+- **Directory**: `order-service/`
+- **Port**: 3004
+- **Base URL**: `http://localhost:3004/api/v1`
+- **Tables**: `OrderTable`
+- **Dependencies**: `CART_SERVICE_URL=http://localhost:3003`, `INVENTORY_SERVICE_URL=http://localhost:3002`, `PAYMENT_SERVICE_URL=http://localhost:3005`
+- **Command to Run**: `npm run dev`
+
+## 6. Payment Service
+- **Directory**: `payment-service/`
+- **Port**: 3005
+- **Base URL**: `http://localhost:3005/api/v1`
+- **Tables**: `PaymentTable`
+- **Command to Run**: `npm run dev`
+
+## 7. Notification Service
+- **Directory**: `notification-service/`
+- **Port**: 3006
+- **Base URL**: `http://localhost:3006/api/v1`
+- **Tables**: `NotificationTable`
+- **Command to Run**: `npm run dev`
+
+## Running all services locally
+To run all services simultaneously without Docker, open 7 separate terminal tabs (one for each service directory) and run:
+`npm run dev`
+
+Make sure you have DynamoDB Local running on port 8000 for the database layer to function.

@@ -1,0 +1,63 @@
+[
+  {
+    "eventId": "evt-1234-abcd",
+    "eventType": "UserRegistered",
+    "timestamp": "2026-07-06T10:00:00.000Z",
+    "source": "user-service",
+    "data": {
+      "userId": "user-123",
+      "email": "test@example.com"
+    }
+  },
+  {
+    "eventId": "evt-2345-bcde",
+    "eventType": "OrderCreated",
+    "timestamp": "2026-07-06T10:05:00.000Z",
+    "source": "order-service",
+    "data": {
+      "orderId": "order-789",
+      "userId": "user-123",
+      "totalAmount": 1500,
+      "status": "PENDING"
+    }
+  },
+  {
+    "eventId": "evt-3456-cdef",
+    "eventType": "PaymentSucceeded",
+    "timestamp": "2026-07-06T10:10:00.000Z",
+    "source": "payment-service",
+    "data": {
+      "paymentId": "pay-abc",
+      "orderId": "order-789",
+      "userId": "user-123",
+      "amount": 1500,
+      "status": "SUCCESS"
+    }
+  },
+  {
+    "eventId": "evt-4567-defg",
+    "eventType": "StockReserved",
+    "timestamp": "2026-07-06T10:06:00.000Z",
+    "source": "inventory-service",
+    "data": {
+      "orderId": "order-789",
+      "reservedItems": [
+        {
+          "productId": "prod-1",
+          "quantity": 2
+        }
+      ]
+    }
+  },
+  {
+    "eventId": "evt-5678-efgh",
+    "eventType": "OrderCancelled",
+    "timestamp": "2026-07-06T10:20:00.000Z",
+    "source": "order-service",
+    "data": {
+      "orderId": "order-789",
+      "userId": "user-123",
+      "reason": "Customer request"
+    }
+  }
+]

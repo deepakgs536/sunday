@@ -1,0 +1,163 @@
+{
+  "info": {
+    "name": "Sunday E-Commerce API",
+    "description": "Postman Collection for all 7 Serverless E-Commerce Microservices",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "User Service",
+      "item": [
+        {
+          "name": "Health Check",
+          "request": {
+            "method": "GET",
+            "url": { "raw": "http://localhost:3000/api/v1/health", "protocol": "http", "host": ["localhost"], "port": "3000", "path": ["api", "v1", "health"] }
+          }
+        },
+        {
+          "name": "Register User",
+          "request": {
+            "method": "POST",
+            "header": [ { "key": "Content-Type", "value": "application/json" } ],
+            "url": { "raw": "http://localhost:3000/api/v1/users/register", "protocol": "http", "host": ["localhost"], "port": "3000", "path": ["api", "v1", "users", "register"] },
+            "body": { "mode": "raw", "raw": "{\n  \"email\": \"test@example.com\",\n  \"password\": \"Password123!\",\n  \"firstName\": \"John\",\n  \"lastName\": \"Doe\"\n}" }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Product Service",
+      "item": [
+        {
+          "name": "Health Check",
+          "request": {
+            "method": "GET",
+            "url": { "raw": "http://localhost:3001/api/v1/health", "protocol": "http", "host": ["localhost"], "port": "3001", "path": ["api", "v1", "health"] }
+          }
+        },
+        {
+          "name": "List Products",
+          "request": {
+            "method": "GET",
+            "url": { "raw": "http://localhost:3001/api/v1/products", "protocol": "http", "host": ["localhost"], "port": "3001", "path": ["api", "v1", "products"] }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Inventory Service",
+      "item": [
+        {
+          "name": "Health Check",
+          "request": {
+            "method": "GET",
+            "url": { "raw": "http://localhost:3002/api/v1/health", "protocol": "http", "host": ["localhost"], "port": "3002", "path": ["api", "v1", "health"] }
+          }
+        },
+        {
+          "name": "Get Stock",
+          "request": {
+            "method": "GET",
+            "url": { "raw": "http://localhost:3002/api/v1/inventory/stock/prod-1", "protocol": "http", "host": ["localhost"], "port": "3002", "path": ["api", "v1", "inventory", "stock", "prod-1"] }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Cart Service",
+      "item": [
+        {
+          "name": "Health Check",
+          "request": {
+            "method": "GET",
+            "url": { "raw": "http://localhost:3003/api/v1/health", "protocol": "http", "host": ["localhost"], "port": "3003", "path": ["api", "v1", "health"] }
+          }
+        },
+        {
+          "name": "Add to Cart",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Authorization", "value": "Bearer user-123" },
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "url": { "raw": "http://localhost:3003/api/v1/cart/items", "protocol": "http", "host": ["localhost"], "port": "3003", "path": ["api", "v1", "cart", "items"] },
+            "body": { "mode": "raw", "raw": "{\n  \"productId\": \"prod-1\",\n  \"quantity\": 2\n}" }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Order Service",
+      "item": [
+        {
+          "name": "Health Check",
+          "request": {
+            "method": "GET",
+            "url": { "raw": "http://localhost:3004/api/v1/health", "protocol": "http", "host": ["localhost"], "port": "3004", "path": ["api", "v1", "health"] }
+          }
+        },
+        {
+          "name": "Create Order",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Authorization", "value": "Bearer user-123" },
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "url": { "raw": "http://localhost:3004/api/v1/orders", "protocol": "http", "host": ["localhost"], "port": "3004", "path": ["api", "v1", "orders"] }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Payment Service",
+      "item": [
+        {
+          "name": "Health Check",
+          "request": {
+            "method": "GET",
+            "url": { "raw": "http://localhost:3005/api/v1/health", "protocol": "http", "host": ["localhost"], "port": "3005", "path": ["api", "v1", "health"] }
+          }
+        },
+        {
+          "name": "Verify Payment",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Authorization", "value": "Bearer user-123" },
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "url": { "raw": "http://localhost:3005/api/v1/payments/verify", "protocol": "http", "host": ["localhost"], "port": "3005", "path": ["api", "v1", "payments", "verify"] },
+            "body": { "mode": "raw", "raw": "{\n  \"paymentId\": \"pay-1\"\n}" }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Notification Service",
+      "item": [
+        {
+          "name": "Health Check",
+          "request": {
+            "method": "GET",
+            "url": { "raw": "http://localhost:3006/api/v1/health", "protocol": "http", "host": ["localhost"], "port": "3006", "path": ["api", "v1", "health"] }
+          }
+        },
+        {
+          "name": "Send Notification",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Authorization", "value": "Bearer user-123" },
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "url": { "raw": "http://localhost:3006/api/v1/notifications/send", "protocol": "http", "host": ["localhost"], "port": "3006", "path": ["api", "v1", "notifications", "send"] },
+            "body": { "mode": "raw", "raw": "{\n  \"userId\": \"user-123\",\n  \"type\": \"EMAIL\",\n  \"subject\": \"Test Alert\",\n  \"message\": \"This is a test notification.\"\n}" }
+          }
+        }
+      ]
+    }
+  ]
+}
