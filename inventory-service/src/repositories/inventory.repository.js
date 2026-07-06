@@ -66,17 +66,18 @@ class InventoryRepository {
 
     if (updateExpressionParts.length === 0) return null;
 
+    expressionAttributeNames['#isDeleted'] = 'isDeleted';
+    expressionAttributeValues[':condFalseVal'] = false;
+
     const params = {
       TableName: TABLE_NAME,
       Key: { productId },
       UpdateExpression: `SET ${updateExpressionParts.join(', ')}`,
       ExpressionAttributeNames: expressionAttributeNames,
       ExpressionAttributeValues: expressionAttributeValues,
-      ConditionExpression: 'attribute_exists(productId) AND isDeleted = :condFalseVal',
+      ConditionExpression: 'attribute_exists(productId) AND (attribute_not_exists(#isDeleted) OR #isDeleted = :condFalseVal)',
       ReturnValues: 'ALL_NEW'
     };
-
-    expressionAttributeValues[':condFalseVal'] = false;
 
     const { Attributes } = await documentClient.send(new UpdateCommand(params));
     return Attributes;

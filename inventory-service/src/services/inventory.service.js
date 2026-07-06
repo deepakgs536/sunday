@@ -65,7 +65,7 @@ class InventoryService {
       throw error;
     }
 
-    const newQuantity = inventory.quantity + amount;
+    const newQuantity = (inventory.quantity || 0) + amount;
     const updated = await inventoryRepository.update(productId, { quantity: newQuantity });
     
     await eventService.publish('StockAdded', {
@@ -86,14 +86,14 @@ class InventoryService {
       throw error;
     }
 
-    const newQuantity = inventory.quantity - amount;
+    const newQuantity = (inventory.quantity || 0) - amount;
     if (newQuantity < 0) {
       const error = new Error('Quantity cannot be below zero');
       error.statusCode = 400;
       throw error;
     }
 
-    const available = newQuantity - inventory.reservedQuantity;
+    const available = newQuantity - (inventory.reservedQuantity || 0);
     if (available < 0) {
       const error = new Error('Cannot remove stock: reserved stock exceeds new quantity');
       error.statusCode = 400;
@@ -127,14 +127,14 @@ class InventoryService {
       throw error;
     }
 
-    const available = inventory.quantity - inventory.reservedQuantity;
+    const available = (inventory.quantity || 0) - (inventory.reservedQuantity || 0);
     if (amount > available) {
       const error = new Error('Cannot reserve more than available stock');
       error.statusCode = 400;
       throw error;
     }
 
-    const newReserved = inventory.reservedQuantity + amount;
+    const newReserved = (inventory.reservedQuantity || 0) + amount;
     const updated = await inventoryRepository.update(productId, { reservedQuantity: newReserved });
 
     await eventService.publish('StockReserved', {
@@ -155,7 +155,7 @@ class InventoryService {
       throw error;
     }
 
-    const newReserved = inventory.reservedQuantity - amount;
+    const newReserved = (inventory.reservedQuantity || 0) - amount;
     if (newReserved < 0) {
       const error = new Error('Cannot release more than reserved stock');
       error.statusCode = 400;

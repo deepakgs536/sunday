@@ -8,7 +8,7 @@ const createInventorySchema = z.object({
 
 const stockOperationSchema = z.object({
   body: z.object({
-    amount: z.number().int().positive('Amount must be a positive integer')
+    amount: z.coerce.number().int().positive('Amount must be a positive integer')
   })
 });
 
