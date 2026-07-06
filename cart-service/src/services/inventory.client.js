@@ -9,7 +9,7 @@ class InventoryClient {
     }
 
     try {
-      const response = await fetch(`${env.INVENTORY_SERVICE_URL}/v1/api/inventory/${productId}`);
+      const response = await fetch(`${env.INVENTORY_SERVICE_URL}/api/v1/inventory/${productId}`);
       if (!response.ok) {
         if (response.status === 404) return { isAvailable: false };
         throw new Error(`Inventory check failed with status: ${response.status}`);

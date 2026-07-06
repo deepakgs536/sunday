@@ -6,6 +6,7 @@ dotenv.config();
 const envSchema = z.object({
   PORT: z.string().default('3003'),
   NODE_ENV: z.enum(['development', 'production', 'test']).default('development'),
+  JWT_SECRET: z.string(),
   AWS_REGION: z.string().default('us-east-1'),
   CART_TABLE: z.string(),
   PRODUCT_SERVICE_URL: z.string().url().optional(),

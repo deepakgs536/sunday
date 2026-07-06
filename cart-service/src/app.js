@@ -21,7 +21,7 @@ app.use(loggerMiddleware);
 
 const API_PREFIX = '/api/v1';
 
-app.use(`${API_PREFIX}/health`, healthRoutes);
+app.use(`${API_PREFIX}/cart/health`, healthRoutes);
 app.use(`${API_PREFIX}/cart`, cartRoutes);
 
 app.use((req, res, next) => {

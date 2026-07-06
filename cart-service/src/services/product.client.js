@@ -9,7 +9,7 @@ class ProductClient {
     }
 
     try {
-      const response = await fetch(`${env.PRODUCT_SERVICE_URL}/v1/api/products/${productId}`);
+      const response = await fetch(`${env.PRODUCT_SERVICE_URL}/api/v1/products/${productId}`);
       if (!response.ok) {
         if (response.status === 404) return null;
         throw new Error(`Product check failed with status: ${response.status}`);

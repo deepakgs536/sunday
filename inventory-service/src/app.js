@@ -19,7 +19,7 @@ app.use(express.urlencoded({ extended: true }));
 
 app.use(loggerMiddleware);
 
-const API_PREFIX = '/v1/api';
+const API_PREFIX = '/api/v1';
 
 app.use(`${API_PREFIX}/health`, healthRoutes);
 app.use(`${API_PREFIX}/inventory`, inventoryRoutes);

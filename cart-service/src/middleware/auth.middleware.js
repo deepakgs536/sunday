@@ -1,4 +1,6 @@
 const { error } = require('../utils/response');
+const jwt = require("jsonwebtoken");
+const env = require("../config/env");
 
 const authMiddleware = (req, res, next) => {
   const authHeader = req.headers.authorization;
@@ -9,15 +11,20 @@ const authMiddleware = (req, res, next) => {
 
   const token = authHeader.split(' ')[1];
   
-  if (token === 'invalid-token') {
-    return error(res, 401, 'Unauthorized: Invalid token');
-  }
+  try {
+      const decoded = jwt.verify(token, env.JWT_SECRET);
 
-  // Extract mock userId from token or set default for testing
-  req.user = {
-    userId: token === 'user-123' ? 'user-123' : 'mock-user-id',
-    role: 'USER'
-  };
+      req.user = {
+          userId: decoded.userId,
+          email: decoded.email,
+          role: decoded.role
+      };
+
+      next();
+
+  } catch (err) {
+      return error(res, 401, "Unauthorized: Invalid or expired token");
+  }
 
   next();
 };
